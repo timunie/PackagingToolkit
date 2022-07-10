@@ -1,0 +1,39 @@
+﻿<mah:MetroWindow x:Class="Sample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Sample.ViewModels"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Sample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <mah:MetroWindow.DataContext>
+        <vm:MainViewModel />
+    </mah:MetroWindow.DataContext>
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <ToggleButton Content="◉ Settings" x:Name="ToggleSettings" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <mah:MetroWindow.Flyouts>
+        <mah:FlyoutsControl>
+            <mah:Flyout Header="Settings" 
+                        IsOpen="{Binding ElementName=ToggleSettings, Path=IsChecked}"
+                        Position="Right">
+                <StackPanel>
+                    <TextBlock>Enter your Greeting</TextBlock>
+                    <TextBox Text="{Binding Greeting}" /> 
+                    <TextBlock>Enter your Name</TextBlock>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </mah:Flyout>
+        </mah:FlyoutsControl>
+    </mah:MetroWindow.Flyouts>
+
+    <Grid>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Result}" />
+    </Grid>
+</mah:MetroWindow>
